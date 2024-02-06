@@ -123,11 +123,32 @@
                 "
             >
                 <Step4 :formData="formData" />
-                <ButtonStep @prev="prevStep" @next="nextStep" />
+                <!-- <ButtonStep
+                    @prev="prevStep"
+                    @next="submitForm"
+                    :titleButton="'Submit'"
+                /> -->
+
+                <div
+                    style="
+                        align-items: flex-end;
+                        justify-content: space-between;
+                        display: flex;
+                        margin: 10px;
+                    "
+                >
+                    <a-button type="primary" @click="prevStep"
+                        >Previous</a-button
+                    >
+
+                    <a-button type="primary" @click="submitForm"
+                        >Submit</a-button
+                    >
+                </div>
             </div>
         </div>
     </div>
-    <a-button @click="handleSubmit">debugg</a-button>
+    <!-- <a-button @click="handleSubmit">debugg</a-button> -->
 </template>
 
 <script>
@@ -148,7 +169,6 @@ export default {
             hadleMeal: "",
             handleRestaurant: "",
             handleNo: "",
-            // form: this.$refs.form,
             formData: {
                 meal: "",
                 numberOfPeople: 0,
@@ -171,12 +191,12 @@ export default {
         };
     },
     methods: {
-        handleSubmit() {
-            console.log(this.formData.numberOfPeople);
-            console.log(this.formData.meal);
-            console.log(this.dishes);
-            console.log(this.formData);
+        submitForm() {
+            const data = { ...this.formData };
+            data.orders = [...this.formData.orders];
+            console.log(data);
         },
+
         updateDish(updateDish) {
             // const _updateDish = updateDish.map((dish) => {
             //     return { value: dish.value, label: dish.label };
@@ -263,7 +283,3 @@ export default {
     },
 };
 </script>
-
-<style>
-/* Add your custom styles here */
-</style>

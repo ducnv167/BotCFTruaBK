@@ -36,7 +36,7 @@
                 <div>
                     <a-input-number
                         :min="1"
-                        :max="100000"
+                        :max="10"
                         v-model:value="record.no"
                         @change="handleChangeNo(record, $event)"
                     />
