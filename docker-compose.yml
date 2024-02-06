@@ -1,0 +1,64 @@
+version: "3"
+services:
+    #Laravel App
+    fabbi_test:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: fabbi_test
+        container_name: fabbi_test
+        restart: unless-stopped
+        tty: true
+        environment:
+            SERVICE_NAME: fabbi_test
+            SERVICE_TAGS: dev
+        working_dir: /var/www/html
+        #    ports:
+        #        - "8001:80"
+        volumes:
+            - ./:/var/www/html
+        networks:
+            - fabbi_laravel
+
+    #Nginx Service
+    nginx:
+        image: nginx:alpine
+        container_name: nginx
+        restart: unless-stopped
+        tty: true
+        ports:
+            - "80:80"
+        #      - "443:443"
+        volumes:
+            - ./:/var/www/html
+            - ./nginx/conf.d/:/etc/nginx/conf.d/
+        #      - ./nginx/ssl/:/etc/nginx/ssl/
+        networks:
+            - fabbi_laravel
+
+    #MySQL Service
+#  db:
+#    image: mysql:5.7
+#    container_name: db
+#    restart: unless-stopped
+#    tty: true
+#    ports:
+#      - "3306:3306"
+#    environment:
+#      MYSQL_DATABASE: laraveldb
+#      MYSQL_USER: root
+#      MYSQL_PASSWORD: a1!
+#      MYSQL_ROOT_PASSWORD: a1!
+#    volumes:
+#      - mysqldata:/var/lib/mysql/
+#    networks:
+#      - laravel
+
+#Docker Networks
+networks:
+    fabbi_laravel:
+        driver: bridge
+#Volumes
+#volumes:
+#  mysqldata:
+#    driver: local
