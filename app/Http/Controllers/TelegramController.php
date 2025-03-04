@@ -29,7 +29,6 @@ class TelegramController extends Controller
     public function sendMessage($message)
     {
         $url = "https://api.telegram.org/bot{$this->token}/sendMessage";
-
         try {
             $response = $this->client->post($url, [
                 'form_params' => [

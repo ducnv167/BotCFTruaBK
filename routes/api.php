@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LunarCalendarController;
 use App\Http\Controllers\TelegramController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,3 +23,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/send-telegram', [TelegramController::class, 'sendMessageToTelegram']);
 Route::post('/telegram/webhook', [TelegramController::class, 'handleWebhook']);
 Route::get('/telegram/set-webhook', [TelegramController::class, 'setWebhook']);
+Route::get('/lunar-calendar/check-moc-ton', [LunarCalendarController::class, 'checkMocTon']);
