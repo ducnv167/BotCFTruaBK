@@ -30,11 +30,13 @@ class CheckMocTon extends Command
 
         $lunarCalendar = LunarCalendarHelper::isDaysBeforeEndOfLunarMonth();
         $chatId = env('TELEGRAM_CHAT_ID');
+
+        $telegram = new TelegramHelper();
+        $telegram->replyToMessage(env('TELEGRAM_MY_CHAT_ID'), "Job app:check-moc-ton chạy");
+
         if ($lunarCalendar) {
             info('Đến ngày đi ăn mộc tồn rồi');
             $telegram = new TelegramHelper();
-            // $message = "📢 Còn 3 ngày là cuối tháng rồi, \n các khầy làm tí mộc tồn nhỉ 📅🙌";
-            // $telegram->replyToMessage($chatId, $message);
             $telegram->sendPoll(
                 $chatId,
                 "📢 Còn 3 ngày là cuối tháng rồi,
