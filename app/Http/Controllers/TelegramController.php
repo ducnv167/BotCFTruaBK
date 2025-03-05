@@ -80,5 +80,8 @@ class TelegramController extends Controller
         return response()->json(['status' => 'success']);
     }
 
-
+    public function setWebhook()
+    {
+        return $this->telegram->setWebhook();
+    }
 }
